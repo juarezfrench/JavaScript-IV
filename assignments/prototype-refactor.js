@@ -3,26 +3,16 @@
 // 2. Your goal is to refactor all of this code to use ES6 Classes. The console.log() statements should still return what is expected of them.
 
 class GameObject {
-  constructor( createdAt, dimensions,name ) {
-    this.createdAt = createdAt;
-    this.dimensions = dimensions;
-    this.name = name;
+  constructor(GameObjAttr) {
+    this.createdAt = GameObjAttr.createdAt;
+    this.dimensions = GameObjAttr.dimensions;
+    this.name = GameObjAttr.name;
   }
 
   destroy() {
     console.log(`${this.name} was removed from the game.`);
   }
 }
-
-// function GameObject(options) {
-//     this.createdAt = options.createdAt;
-//     this.dimensions = options.dimensions;
-//     this.name = options.name;
-//   }
-
-//   GameObject.prototype.destroy = function () {
-//     return `${this.name} was removed from the game.`;
-//   };
 
 /*
   === CharacterStats ===
@@ -33,9 +23,9 @@ class GameObject {
   */
 
 class CharacterStats extends GameObject {
-  constructor(createdAt, dimensions, name, healthPoints ) {
-    super(createdAt, dimensions, name);
-    this.healthPoints = healthPoints;
+  constructor(CharStatsAttr) {
+    super(CharStatsAttr);
+    this.healthPoints = CharStatsAttr.healthPoints;
   }
 
   takeDamage() {
@@ -50,62 +40,34 @@ class CharacterStats extends GameObject {
 // Sets up inheritance with GameObject
 // CharacterStats.prototype = Object.create(GameObject.prototype);
 
-/*
-  === Hudestroy() { or character resembling that of a human.) ===
-  * team            return {`${super.destroy()}`;
-  * weapons
-  * language
-  * greet() // prototype method -> returns the string '<object name> offers a greeting in <object language>.'
-  * should inherit destroy() from GameObject through CharacterStats
-  * should inherit takeDamage() from CharacterStats
-  */
-class Humanoid extends CharacterStats {
-  constructor(createdAt, dimensions, name, healthPoints, team, weapons, language) {
-    super(createdAt, dimensions, name, healthPoints);
-    this.team = team;
-    this.weapons = weapons;
-    this.language = language;
-  }
-   
-    greet() {
-        console.log(`${super.name} offers a greeting in ${this.language}.`);
-        }
-
-    takeDamage() {
-        return `${super.takeDamage()}`;
-          }
-        
-          destroy() {
-        return `${super.destroy()}`;
-          }
-  }
-
-
-//constructor(createdAt, dimensions, name, healthpoints, team, weapons, language) {
-
-//   function Humanoid(humanoidOptions) {
-//     CharacterStats.call(this, humanoidOptions);
-//     super ( )
-//     this.team = humanoidOptions.team;
-//     this.weapons = humanoidOptions.weapons;
-//     this.language = humanoidOptions.language;
-//   }
-
-//   takeDamage() {
-//     return `${this.name} took damage.`;
-//   };
-
-//   Humanoid.prototype = Object.create(CharacterStats.prototype);
-
-//   Humanoid.prototype.greet = function () {
-//     return `${this.name} offers a greeting in ${this.language}.`;
-//   };
-
-/*
- * Inheritance chain: GameObject -> CharacterStats -> Humanoid
- * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
- * Instances of CharacterStats should have all of the same properties as GameObject.
+/*  === Hudestroy() { or character resembling that of a human.) ===
+ * team            return {`${super.destroy()}`;
+ * weapons
+ * language
+ * greet() // prototype method -> returns the string '<object name> offers a greeting in <object language>.'
+ * should inherit destroy() from GameObject through CharacterStats
+ * should inherit takeDamage() from CharacterStats
  */
+class Humanoid extends CharacterStats {
+  constructor(HumanoidAttr) {
+    super(HumanoidAttr);
+    this.team = HumanoidAttr.team;
+    this.weapons = HumanoidAttr.weapons;
+    this.language = HumanoidAttr.language;
+  }
+
+  greet() {
+    console.log(`${this.name} offers a greeting in ${this.language}.`);
+  }
+
+  takeDamage() {
+    return `${super.takeDamage()}`;
+  }
+
+  destroy() {
+    return `${super.destroy()}`;
+  }
+}
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
